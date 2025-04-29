@@ -6,20 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE-edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Young AI Community | Mexico City Hub</title>
-    <script src="//code.tidio.co/p6j71v0ztuqpxfll9ftuksmpnjolypx0.js" async></script>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Exo 2&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/6a6571c932.js" crossorigin="anonymous"></script>
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-          new google.translate.TranslateElement({
-            pageLanguage: 'en',
-            includedLanguages: 'en,es',
-            layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-          }, 'google_translate_element');
-        }
-      </script>
-      <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>           
+    <script src="https://kit.fontawesome.com/6a6571c932.js" crossorigin="anonymous"></script>     
 </head>
 
 <body>
@@ -318,40 +307,6 @@
                 });
             });     
         });
-
-  let currentLang = 'en';
-
-  function updateButtonText() {
-    const btn = document.getElementById('translate-btn');
-    if (currentLang === 'en') {
-      btn.innerHTML = 'Translate to Spanish';
-    } else {
-      btn.innerHTML = 'Translate to English';
-    }
-  }
-
-  document.getElementById('translate-btn').addEventListener('click', function () {
-    const select = document.querySelector('.goog-te-combo');
-    if (select) {
-      if (currentLang === 'en') {
-        select.value = 'es';
-        currentLang = 'es';
-      } else {
-        select.value = 'en';
-        currentLang = 'en';
-      }
-      select.dispatchEvent(new Event('change'));
-      updateButtonText();
-    }
-  });
-
-  window.addEventListener('load', () => {
-    const userLang = navigator.language || navigator.userLanguage;
-    if (userLang.startsWith('es')) {
-      currentLang = 'es';
-    }
-    updateButtonText();
-  });
 
     </script>
 <script src="models/neuralNetwork.js"></script>
