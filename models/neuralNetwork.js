@@ -63,9 +63,9 @@ document.addEventListener("DOMContentLoaded", function () {
   
       const containerWidth = networkContainer.offsetWidth;
       const containerHeight = networkContainer.offsetHeight;
-      const centerX = containerWidth / 2 - 7.5;
-      const centerY = containerHeight / 2 - 7.5;
-      const radius = containerWidth * 0.3;
+      const centerX = containerWidth / 2 - 3.5;
+      const centerY = containerHeight / 2 - 3;
+      const radius = containerWidth * 0.5;
   
       const nodeCount = 15;
       for (let i = 0; i < nodeCount; i++) {
