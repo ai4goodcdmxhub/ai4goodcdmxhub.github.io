@@ -831,7 +831,7 @@ em {
 }
 
 .alliances-gallery img {
-    width: auto;
+    width: 300px;
     height: auto;
     margin: 0 20px; 
     border-radius: 8px;
