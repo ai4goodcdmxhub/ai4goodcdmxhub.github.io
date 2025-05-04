@@ -1107,6 +1107,8 @@ footer:hover::after {
     }
 
     .logo {
+        justify-content: center;
+        align-items: center;
         margin-left: 10px;
         height: 80px;
         width: 110px;
@@ -1142,6 +1144,11 @@ body::before {
   
 /* nav sensible al ancho de la pantalla */
 @media screen and (max-width: 790px) {
+    .logo{
+        width: 120px;
+        height: auto;
+        margin-top: 30px !important;
+    }
     #sidemenu {
         display: block; 
         gap: 10px;
@@ -1151,6 +1158,7 @@ body::before {
     }
 
     #sidemenu li {
+        display:none;
         margin-bottom: 10px;
     }
 
@@ -1163,15 +1171,44 @@ body::before {
         display: block;
         border: 1px solid #ddd;
         border-radius: 5px;
+        color: #00ffe5;
     }
 
     #sidemenu li a:hover {
-        background-color: #f0f0f0;
+        background-color: #2c6f68;
     }
 
     .logo {
         width: 120px; 
+        margin: 0;
+        display: block;
+        margin-bottom: -50px;
     }
+    .robot-assistant,
+    .network-container {
+        display: none;
+    }
+
+.cube-wrapper {
+    perspective: 800px;
+    width: 150px;
+    height: 300px;
+    margin: 0 auto;
+    overflow: hidden; 
+    position: relative;
+    margin-bottom: 100px;
+}
+
+.cube {
+    width: 40%;
+    height: 40%;
+    transform-style: preserve-3d;
+    animation: spin 20s infinite linear;
+    position: relative;
+    transform-origin: center center;
+}
+
+
 }
 
 .header-right {
