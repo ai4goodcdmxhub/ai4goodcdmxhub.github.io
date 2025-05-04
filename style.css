@@ -17,7 +17,7 @@ body {
 .alliances-gallery img {
     background-color: transparent;
     background: none;
-    filter: grayscale(100%) brightness(3);
+    filter: grayscale(100%) brightness(1000%);
 }
 
 #translate-btn {
@@ -474,6 +474,10 @@ nav ul li a:hover {
     background: #121212;
     color: #fff;
 }
+#about p {
+    font-size: 20px;
+  }
+
 
 .grid-pair {
     display: grid;
@@ -827,8 +831,8 @@ em {
 }
 
 .alliances-gallery img {
-    width: 300px;
-    height:200px;
+    width: auto;
+    height: auto;
     margin: 0 20px; 
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -1322,7 +1326,10 @@ body::before {
     margin-bottom: 350px;
 }
 
-
+.mentor-description p {
+    font-size: 50px;
+    text-align: justify;
+}
 
 
   
