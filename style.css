@@ -1281,10 +1281,13 @@ body::before {
 }
 
 .mentors-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    margin-left: 30px;
+    margin-bottom: 80px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 30px;
+    justify-items: center;
+    margin-top: 30px;
 }
 
 .mentor {
