@@ -1371,6 +1371,88 @@ body::before {
     text-align: justify;
 }
 
+/* Default: hide mobile gallery, show cube */
+.mobile-only {
+  display: none;
+}
+
+.desktop-only {
+  display: block;
+}
+
+/* Show mobile version only on screens smaller than 1024px (typical iPad width) */
+@media screen and (max-width: 1024px) {
+  .cube-wrapper {
+    display: none;
+  }
+  .mobile-only {
+    display: flex;
+  }
+
+  .desktop-only {
+    display: none;
+  }
+
+  .image-gallery {
+    overflow-x: auto;
+    gap: 10px;
+    scroll-snap-type: x mandatory;
+    padding: 10px 0;
+  }
+
+  .image-gallery img {
+    flex: 0 0 auto;
+    width: 80%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 8px;
+    scroll-snap-align: start;
+    object-fit: cover;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 1.5rem; /* ~24px */
+  }
+
+  h2 {
+    font-size: 1.3rem; /* ~21px */
+  }
+
+  h3 {
+    font-size: 1.1rem; /* ~18px */
+  }
+
+  .apply-btn {
+    font-size: 14px;
+    padding: 10px 18px;
+  }
+
+  nav ul li a {
+    font-size: 14px;
+  }
+
+  .robot-message {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .brain-3d::before,
+  .chip-3d,
+  .globe-3d,
+  .globe-3d::after {
+    animation: none !important;
+    box-shadow: none !important;
+  }
+}
+
+
 
   
 
