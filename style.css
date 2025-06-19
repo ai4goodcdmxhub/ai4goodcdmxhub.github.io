@@ -20,29 +20,6 @@ body {
     filter: grayscale(100%) brightness(1000%);
 }
 
-#translate-btn {
-    font-size: 1.1rem;
-    background: linear-gradient(45deg, #00ffe5, #008cff);
-    border: none;
-    border-radius: 20px;
-    color: #000;
-    cursor: pointer;
-    transition: 0.3s ease-in-out;
-    z-index: 1;
-    position: relative;
-    padding: 10px;
-  }
-  
-  #translate-btn:hover {
-    transform: scale(1.08) rotateX(10deg);
-    box-shadow: 0 12px 25px rgba(0, 255, 229, 0.3);
-  }
-  
-  #custom-translate-wrapper {
-    text-align: right;
-    align-content: flex-start;
-  }
-  
 /* estilizar scrollbar */
 
 ::-webkit-scrollbar {
@@ -51,28 +28,28 @@ body {
   
 ::-webkit-scrollbar-track {
     background: #0a0a0a;
-    border-left: 2px solid #00ffea; 
-    box-shadow: inset 0 0 8px #00ffea;
+    border-left: 2px solid #ffcc00; 
+    box-shadow: inset 0 0 8px #ffcc00;
 }
   
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(120deg, #00ffea 0%, #00b3ff 100%);
+    background: linear-gradient(120deg, #ffcc00);
     border-radius: 2px;
-    box-shadow: 0 0 10px #00ffea, 0 0 20px #00ffea;
-    border: 1px solid #00ffea;
+    box-shadow: 0 0 10px #ffcc00 0 0 20px #ffcc00;
+    border: 1px solid #ffcc00;
 }
   
 ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(120deg, #00ffe1 0%, #00cfff 100%);
-    box-shadow: 0 0 15px #00ffe1, 0 0 25px #00ffe1;
-    border-color: #00ffe1;
+    background: linear-gradient(120deg, #ffcc00);
+    box-shadow: 0 0 15px #ffcc00, 0 0 25px #ffcc00;
+    border-color: #ffcc00;
 }
   
 /* para otros navegadores */
 
 * {
     scrollbar-width: thin;
-    scrollbar-color: #00ffe1 #0a0a0a;
+    scrollbar-color: #ffcc00 #0a0a0a;
 }  
 
 /* todo lo que aparece en el nav */
@@ -80,47 +57,64 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 10%;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    padding-right: 10px;
+    padding-top: 5px;
     background-color: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(12px);
-    position: sticky;
     top: 0;
     z-index: 999;
     transition: all 0.3s ease;
-    gap: 70px;
+    gap: 20px;
+    font-size: 18px;
+}
+nav .logo {
+    height: 100px;
+    width: 120px;
+    align-items: left;
+    margin-left: 0;
+    padding-left: 0;
 }
 
-.logo {
-    height: 150px;
-    width: 150px;
-    margin-right: auto;
-    transition: transform 0.3s ease;
-}
-
-.logo:hover {
-    transform: scale(1.05) rotateZ(2deg);
-}
 
 nav ul {
     display: flex;
-    gap: 55px;
+    gap: 25px;
     list-style: none;
     margin-left: auto;
 }
 
 nav ul li a {
-    text-decoration: none;
-    color: #00ffe5;
-    font-weight: 700;
-    font-size: 1.3rem;
-    letter-spacing: 0.5px;
-    transition: all 0.3s ease-in-out;
+  position: relative;
+  display: inline-block;       /* important for padding & box sizing */
+  color: #ffffff;
+  padding: 8px 16px;           /* symmetric padding */
+  text-decoration: none;
+  z-index: 1;
+  transition: color 0.3s ease;
+}
+
+nav ul li a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  border-radius: 4px;          /* optional rounded corners */
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+
+nav ul li a:hover::after {
+  opacity: 1;
 }
 
 nav ul li a:hover {
-    color: #ffffff;
-    transform: scale(1.15);
-    text-shadow: 0 0 8px #00ffe5;
+  color: #000000;              /* black text on white background */
 }
 
 /* seccion de header, robot y neural network */
@@ -178,7 +172,7 @@ nav ul li a:hover {
     font-weight: 800;
     z-index: 1;
     position: relative;
-    text-shadow: 0px 0px 15px #00ffe5;
+    text-shadow: 0px 0px 15px #ffcc00;
 }
 
 .header-content h3 {
@@ -189,48 +183,11 @@ nav ul li a:hover {
     position: relative;
 }
 
-.network-container {
-    position: relative;
-    width: 100%;
-    height: 300px;
-    overflow: hidden;
-}
-
-.neuron {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    background-color: #3498db;
-    border-radius: 50%;
-}
-
-.connection {
-    position: absolute;
-    height: 2px;
-    background-color: #3498db;
-    transform-origin: 0 50%;
-}
-
-.node {
-  position: absolute;
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  background-color: rgba(0, 255, 255, 0.8);
-  transition: transform 0.1s ease-out;
-}
-
-.edge {
-  position: absolute;
-  background-color: rgba(0, 255, 255, 0.5);
-}
-
-
 .apply-btn {
     margin-top: 40px;
     padding: 18px 36px;
     font-size: 1.1rem;
-    background: linear-gradient(45deg, #00ffe5, #008cff);
+    background: linear-gradient(45deg, #ffcc00, #c7b056);
     border: none;
     border-radius: 40px;
     color: #000;
@@ -238,73 +195,15 @@ nav ul li a:hover {
     transition: 0.3s ease-in-out;
     z-index: 1;
     position: relative;
+    justify-content: center;
 }
 
 .apply-btn:hover {
     transform: scale(1.08) rotateX(10deg);
-    box-shadow: 0 12px 25px rgba(0, 255, 229, 0.3);
+    box-shadow: 0 12px 25px #ffcc00;
 }
+  
 
-.robot-assistant {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    margin-top: 30px;
-    animation: float 3s ease-in-out infinite;
-  }
-  
-  .robot-body {
-    position: relative;
-    width: 60px;
-    height: 60px;
-    background: #222;
-    border: 3px solid #00ffe5;
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 12px;
-    box-shadow: 0 0 10px #00ffe5;
-  }
-  
-  .robot-eyes {
-    display: flex;
-    justify-content: space-between;
-    width: 65%;
-  }
-  
-  .eye {
-    width: 10px;
-    height: 10px;
-    background-color: #00ffe5;
-    border-radius: 50%;
-    box-shadow: 0 0 5px #00ffe5;
-  }
-  
-  .robot-antennas .antenna {
-    position: absolute;
-    top: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 4px;
-    height: 12px;
-    background-color: #00ffe5;
-    border-radius: 2px;
-    animation: pulse 2s infinite;
-  }
-  
-  .robot-message {
-    font-size: 1rem;
-    color: #00ffe5;
-    background: rgba(0, 0, 0, 0.4);
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-weight: 500;
-    box-shadow: 0 0 10px rgba(0, 255, 229, 0.2);
-    text-align: center;
-  }
-  
   /* animaciones de flotar y pulsar */
   @keyframes float {
     0%, 100% { transform: translateY(0); }
@@ -332,7 +231,7 @@ nav ul li a:hover {
   .more-text h2 {
     font-size: 36px;
     margin-bottom: 10px;
-    color: #00ffe0;
+    color: #ffcc00;
     position: relative;
     display: inline-block;
   }
@@ -343,7 +242,7 @@ nav ul li a:hover {
     margin: 8px auto 0; 
     width: 390px;
     height: 3px;
-    background: #00ffe0;
+    background: #ffcc00;
     border-radius: 2px;
   }
   
@@ -388,7 +287,7 @@ nav ul li a:hover {
     display: inline-block;
     margin-top: 20px;
     padding: 12px 24px;
-    background: #00ffe0;
+    background: #ebcc4f;
     color: #000;
     font-weight: bold;
     border-radius: 6px;
@@ -397,7 +296,7 @@ nav ul li a:hover {
   }
   
   .watch-button:hover {
-    background: #00ccbb;
+    background: #ffcc00;
   }  
 
   .cube-wrapper {
@@ -423,8 +322,8 @@ nav ul li a:hover {
     position: absolute;
     width: 300px;
     height: 300px;
-    border: 2px solid rgba(0, 255, 255, 0.3);
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+    border: 2px solid #ffcc00;
+    box-shadow: 0 0 20px #000;
     backface-visibility: hidden;
     border-radius: 10px;
     overflow: hidden;
@@ -458,10 +357,10 @@ nav ul li a:hover {
   
   @keyframes pulse-glow {
     from {
-      box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+      box-shadow: 0 0 10px #ffcc00;
     }
     to {
-      box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
+      box-shadow: 0 0 25px #ffcc00;
     }
   }  
   
@@ -527,10 +426,10 @@ nav ul li a:hover {
     display: block;
     width: 80px;
     height: 80px;
-    background: radial-gradient(circle at center, #9B4DFF, #4FD1C5);
+    background: radial-gradient(circle at center, #ffcc00, #000);
     border-radius: 50%;
     animation: pulse-brain 2s infinite ease-in-out;
-    box-shadow: 0 0 20px #9B4DFF;
+    box-shadow: 0 0 20px #ffcc00;
 }
 
 @keyframes pulse-brain {
@@ -543,13 +442,13 @@ nav ul li a:hover {
 }
 
 .chip-3d {
-    background: #0ff;
+    background: #ffcc00;
     width: 60px;
     height: 60px;
     position: relative;
-    border: 3px solid #4FD1C5;
+    border: 3px solid #ffcc00;
     border-radius: 10px;
-    box-shadow: 0 0 10px #4FD1C5;
+    box-shadow: 0 0 10px #ffcc00;
     animation: rotate-chip 4s infinite linear;
 }
 
@@ -558,7 +457,7 @@ nav ul li a:hover {
     position: absolute;
     width: 10px;
     height: 3px;
-    background: #0ff;
+    background: #ffcc00;
     top: 50%;
     transform: translateY(-50%);
 }
@@ -579,9 +478,9 @@ nav ul li a:hover {
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    background: conic-gradient(from 180deg at 50% 50%, #4FD1C5, #9B4DFF);
+    background: conic-gradient(from 180deg at 50% 50%,#ffcc00, #e3dab5);
     animation: spin-globe 5s linear infinite;
-    box-shadow: inset 0 0 15px rgba(0, 255, 255, 0.3);
+    box-shadow: inset 0 0 15px #ffcc00;
     position: relative;
 }
 
@@ -591,7 +490,7 @@ nav ul li a:hover {
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    border: 2px dashed #00ffe5;
+    border: 2px dashed #ffcc00;
     top: 10px;
     left: 10px;
     animation: orbit 3s linear infinite;
@@ -622,7 +521,7 @@ h2::after {
     display: block;
     height: 2px;
     width: 50%;
-    background: #4FD1C5;
+    background: #ffcc00;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -650,7 +549,7 @@ h2:hover::after {
     margin-bottom: 30px;
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: #4FD1C5;
+    color: #ffcc00;
     position: relative;
 }
 
@@ -659,7 +558,7 @@ h2:hover::after {
     display: block;
     height: 2px;
     width: 50%;
-    background: #4FD1C5;
+    background: #ffcc00;
     position: absolute;
     bottom: -10px;
     left: 25%;
@@ -733,7 +632,7 @@ h3 {
 
 .quote a:hover {
     text-decoration: underline;  
-    text-decoration-color: #4FD1C5;  
+    text-decoration-color: #ffcc00;  
 }
 
 .mission, .vision, .YoungAILeaders {
@@ -755,12 +654,12 @@ h3 {
 
 .mission i, .vision i, .YoungAILeaders i {
     font-size: 40px;
-    color: #9B4DFF;
+    color: #ffcc00;
     margin-bottom: 20px;
 }
 
 .mission h2, .vision h2, .YoungAILeaders h2 {
-    color:  #4FD1C5;;
+    color:  #e6b800;
 }
 
 p {
@@ -772,7 +671,7 @@ p {
 
 
 em {
-    color: #9B4DFF;
+    color: #e6b800;
     font-style: normal;
     font-weight: bold;
     margin-top: 20px; 
@@ -792,7 +691,7 @@ em {
     font-size: 32px;
     font-weight: 700;
     letter-spacing: 1px;
-    color: #4FD1C5;
+    color: #ffcc00;
     margin-bottom: 40px;
     position: relative;
     display: inline-block;
@@ -803,7 +702,7 @@ em {
     display: block;
     height: 2px;
     width: 100%;
-    background: #4FD1C5;;
+    background: #ffcc00;
     position: absolute;
     bottom: -10px;
     left: 0;
@@ -855,7 +754,7 @@ em {
 #team-container h2 {
     font-size: 36px;
     font-weight: 700;
-    color: #4FD1C5;
+    color: #ffcc00;
     margin-bottom: 50px;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -867,7 +766,7 @@ em {
     display: block;
     height: 2px;
     width: 50%;
-    background: #4FD1C5;
+    background: #ffcc00;
     position: absolute;
     bottom: -10px;
     left: 25%;
@@ -951,7 +850,7 @@ h4 {
 #socials h2 {
     font-size: 36px;
     font-weight: 700;
-    color:  #4FD1C5;;
+    color:  #ffcc00;
     margin-bottom: 20px;
     position: relative;
     display: inline-block;
@@ -963,7 +862,7 @@ h4 {
     display: block;
     height: 2px;
     width: 100%;
-    background: #4FD1C5;;
+    background: #ffcc00;
     position: absolute;
     bottom: -10px;
     left: 0;
@@ -991,7 +890,7 @@ h4 {
 }
 
 #socials a:hover {
-    color: #9B4DFF;
+    color: #ffcc00;
     transform: scale(1.2);
 }
 
@@ -1004,7 +903,7 @@ h4 {
 }
 
 #socials p:hover i{
-    color:#9B4DFF;
+    color:#ffcc00;
     transform: scale(1.2);
 }
 
@@ -1123,22 +1022,22 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg width='1000' height='1000' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10 H30 V30 H50 V10 H70 V30 H90' fill='none' stroke='%2300ffe5' stroke-width='0.5'/%3E%3Ccircle cx='10' cy='10' r='0.5' fill='%2300ffe5'/%3E%3Ccircle cx='30' cy='30' r='0.5' fill='%2300ffe5'/%3E%3Ccircle cx='70' cy='30' r='0.5' fill='%2300ffe5'/%3E%3C/svg%3E");
+   background-image: url("data:image/svg+xml,%3Csvg width='1000' height='1000' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10 H30 V30 H50 V10 H70 V30 H90' fill='none' stroke='%23ffcc00' stroke-width='0.5'/%3E%3Ccircle cx='10' cy='10' r='0.5' fill='%23ffcc00'/%3E%3Ccircle cx='30' cy='30' r='0.5' fill='%23ffcc00'/%3E%3Ccircle cx='70' cy='30' r='0.5' fill='%23ffcc00'/%3E%3C/svg%3E");
     background-size: 200px 200px;
     background-repeat: repeat;
     z-index: 0;
     opacity: 0.6; 
     pointer-events: none;
-    filter: drop-shadow(0 0 20px #00ffe5) blur(8px); 
+    filter: drop-shadow(0 0 20px #ffcc00) blur(8px); 
     animation: neon-glow 1.5s infinite alternate; 
   }
   
   @keyframes neon-glow {
     0% {
-      filter: drop-shadow(0 0 20px #00ffe5) blur(2px); 
+      filter: drop-shadow(0 0 20px #ffcc00) blur(2px); 
     }
     100% {
-      filter: drop-shadow(0 0 50px #00ffe5) blur(12px); 
+      filter: drop-shadow(0 0 50px #ffcc00) blur(12px); 
     }
   }
   
@@ -1171,7 +1070,7 @@ body::before {
         display: block;
         border: 1px solid #ddd;
         border-radius: 5px;
-        color: #00ffe5;
+        color:#ffcc00;
     }
 
     #sidemenu li a:hover {
@@ -1268,7 +1167,7 @@ body::before {
     font-size: 32px;
     font-weight: 700;
     letter-spacing: 1px;
-    color: #4FD1C5;
+    color: #ffcc00;
     margin-bottom: 20px;
 }
 
@@ -1323,7 +1222,7 @@ body::before {
 #mentors h2 {
     font-size: 36px;
     font-weight: 700;
-    color:  #4FD1C5;;
+    color:  #ffcc00;;
     margin-bottom: 30px;
     position: relative;
     display: inline-block;
@@ -1335,7 +1234,7 @@ body::before {
     display: block;
     height: 2px;
     width: 100%;
-    background: #4FD1C5;;
+    background: #ffcc00;
     position: absolute;
     bottom: -10px;
     left: 0;
@@ -1500,7 +1399,7 @@ body::before {
 
 
 .info-icon {
-    color: #4FD1C5; /* Primary color for the icon */
+    color: #ffcc00; /* Primary color for the icon */
     opacity: 0;
     transition: opacity 0.3s ease, color 0.3s ease, transform 0.3s ease;
 }
@@ -1509,10 +1408,186 @@ body::before {
 .member:hover .info-icon {
     opacity: 1; /* Make the icon visible */
     transform: scale(1.2); /* Slight zoom effect */
-    color: #9B4DFF; /* Hover color for the icon */
+    color: #ffcc00; /* Hover color for the icon */
 }
 
 
 
-  
+  :root {
+  --primary-bg: #1E293B;
+  --accent: #e6b800;
+  --text: #F9FAFB;
+  --secondary-bg: #64748B;
+}
 
+body {
+  background-color: var(--primary-bg);
+  color: var(--text);
+}
+
+a {
+  color: var(--accent);
+}
+
+#cta-section {
+  text-align: center;
+  padding: 60px 20px;
+  background-color: #d0d0d0; /* Light yellow background */
+  color: #000;
+  border-top: 3px solid #ffcc00;
+  border-bottom: 3px solid #ffcc00;
+}
+
+#cta-section h2 {
+  font-size: 36px;
+  margin-bottom: 15px;
+   position: relative;
+   color: #e6b800;
+}
+
+#cta-section p {
+  color: black;
+}
+#cta-section h2::after {
+  content: '';
+  display: block;
+  height: 2px;
+  width: 40%; /* Reduced width */
+  background: #ffcc00;
+  position: absolute;
+  bottom: -10px;
+  left: 30%;
+  transform: translateX(-50%) scaleX(0);
+  transition: transform 0.3s ease;
+  transform-origin: center;
+}
+#cta-section h2:hover::after {
+    transform: scaleX(1);
+}
+
+
+#cta-section p {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.cta-btn {
+  background-color: #ffcc00;
+  color: #000;
+  padding: 14px 28px;
+  font-size: 18px;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.cta-btn:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.cta-btn.secondary {
+  background-color: #000;
+  color: #fff;
+}
+
+.cta-btn.secondary:hover {
+  background-color: #ffcc00;
+  color: #000;
+}
+
+.event-slideshow {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  height: 500px;
+  margin: 60px auto;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.event-slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.event-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.event-slide.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.event-caption {
+  position: absolute;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.event-caption h3 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.event-caption p {
+  margin: 5px 0 0;
+  font-size: 16px;
+}
+
+.about-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: stretch; /* ensures equal height */
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.about-grid > div {
+  flex: 1 1 calc(33.333% - 20px);
+  box-sizing: border-box;
+  background: #d0d0d0;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column; /* lets inner content expand vertically */
+}
+
+.YoungAILeaders {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.mission, .vision{
+  max-height: 300px;
+}
+
+
+#about p {
+  color: black;
+  text-align: justify;
+  margin-top: 0.2em;
+  margin-bottom: 200px;
+  line-height: 1.5;
+}
