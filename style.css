@@ -1636,5 +1636,37 @@ a {
   #about p {
     font-size: 18px; 
   }
+
+  .header-content {
+    min-height: 120vh; 
+    margin-bottom: -20px;
+  }
+
+  .background {
+    height: 120vh;     
+    object-fit: cover;
+  }
+
+    .header-left h1 {
+    font-size: 50px;
+  }
+
+  .header-left h3 {
+    font-size: 30px;
+    margin-bottom: 60px;
+    margin-top: 60px;
+  }
+
+  .header-left p {
+    font-size: 14px;
+  }
+
+  /* Smaller buttons */
+  .cta-button-group .cta-btn {
+    margin-top: 20px;
+    font-size: 20px;
+    padding: 8px 12px;
+  }
 }
+
 
