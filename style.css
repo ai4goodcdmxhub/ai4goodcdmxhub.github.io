@@ -386,6 +386,24 @@ nav ul li a:hover {
     align-items: stretch; 
 }
 
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+/* The YoungAILeaders div will be full width below */
+
+.YoungAILeaders {
+  background: #f9f9f9;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgb(0 0 0 / 0.05);
+  max-width: 900px;
+  margin: 0 auto; /* center it */
+}
+
 @media (min-width: 900px) {
     .grid-pair {
         grid-template-columns: 1fr 1fr; 
@@ -409,102 +427,8 @@ nav ul li a:hover {
     min-height: 400px; 
 }
 
-.mission .brain-3d,
-.vision .globe-3d {
-    margin-bottom: 20px; 
-}
 
-.brain-3d, .chip-3d, .globe-3d {
-    width: 80px;
-    height: 80px;
-    margin: 20px auto;
-    perspective: 600px;
-}
 
-.brain-3d::before {
-    content: "";
-    display: block;
-    width: 80px;
-    height: 80px;
-    background: radial-gradient(circle at center, #ffcc00, #000);
-    border-radius: 50%;
-    animation: pulse-brain 2s infinite ease-in-out;
-    box-shadow: 0 0 20px #ffcc00;
-}
-
-@keyframes pulse-brain {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.1);
-    }
-}
-
-.chip-3d {
-    background: #ffcc00;
-    width: 60px;
-    height: 60px;
-    position: relative;
-    border: 3px solid #ffcc00;
-    border-radius: 10px;
-    box-shadow: 0 0 10px #ffcc00;
-    animation: rotate-chip 4s infinite linear;
-}
-
-.chip-3d::before, .chip-3d::after {
-    content: "";
-    position: absolute;
-    width: 10px;
-    height: 3px;
-    background: #ffcc00;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.chip-3d::before {
-    left: -15px;
-}
-.chip-3d::after {
-    right: -15px;
-}
-
-@keyframes rotate-chip {
-    from { transform: rotateY(0deg); }
-    to { transform: rotateY(360deg); }
-}
-
-.globe-3d {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: conic-gradient(from 180deg at 50% 50%,#ffcc00, #e3dab5);
-    animation: spin-globe 5s linear infinite;
-    box-shadow: inset 0 0 15px #ffcc00;
-    position: relative;
-}
-
-.globe-3d::after {
-    content: "";
-    position: absolute;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    border: 2px dashed #ffcc00;
-    top: 10px;
-    left: 10px;
-    animation: orbit 3s linear infinite;
-}
-
-@keyframes spin-globe {
-    0% { transform: rotateY(0deg); }
-    100% { transform: rotateY(360deg); }
-}
-
-@keyframes orbit {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
 
 h2 {
     font-size: 32px;
@@ -772,56 +696,133 @@ em {
     left: 25%;
 }
 
+/* seccion del equipo */
+#team-container {
+    padding: 100px 20px;
+    background-color: #1e1e1e;
+    color: #fff;
+    text-align: center;
+}
+
+#team-container h2 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #ffcc00;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+}
+
+#team-container h2::after {
+    content: '';
+    display: block;
+    height: 2px;
+    width: 50%;
+    background: #ffcc00;
+    position: absolute;
+    bottom: -10px;
+    left: 25%;
+}
+
 #team {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 30px;
-    justify-items: center;
-    padding: 0 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
 }
 
 .member {
-    position: relative;
-    background-color: #121212;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    width: 100%;
-    max-width: 300px;
-    text-align: center;
-}
-
-.member:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  position: relative;
+  width: 200px;
+  height: 250px;
+  cursor: pointer;
 }
 
 .member img {
-    width: 65%;
-    height: 180px;
-    object-fit: cover;
-    transition: opacity 0.3s ease;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
 }
 
 .member:hover img {
-    opacity: 0.8;
+  transform: scale(1.05);
 }
 
-.layer {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.6);
-    padding: 15px;
-    text-align: center;
-    transform: translateY(100%);
-    transition: transform 0.3s ease;
+/* Modal Overlay */
+#profile-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
-.member:hover .layer {
-    transform: translateY(0);
+/* Modal Content Box */
+.modal-content {
+  background: #fff;
+  padding: 40px;
+  width: 700px;
+  max-width: 95vw;
+  max-height: 80vh;
+  overflow-y: auto;
+  border-radius: 12px;
+  position: relative;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Close Button */
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #999;
+  font-weight: bold;
+}
+
+.close-btn:hover {
+  color: #000;
+}
+
+/* Modal Body Text Styles */
+#modal-body h3 {
+  margin-top: 0;
+  font-size: 22px;
+  color: #252020; /* Dark text for readability */
+}
+
+#modal-body p {
+  margin: 10px 0;
+  color: #252020; /* Dark text for readability */
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+#modal-body a {
+  color: #ffcc00; /* Yellow links */
+  text-decoration: none;
+}
+
+#modal-body a:hover {
+  text-decoration: underline;
+}
+
+#modal-body hr {
+  border: none;
+  border-top: 1px solid #252020;
+  margin: 20px 0;
 }
 
 h3 {
@@ -1022,7 +1023,7 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-   background-image: url("data:image/svg+xml,%3Csvg width='1000' height='1000' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10 H30 V30 H50 V10 H70 V30 H90' fill='none' stroke='%23ffcc00' stroke-width='0.5'/%3E%3Ccircle cx='10' cy='10' r='0.5' fill='%23ffcc00'/%3E%3Ccircle cx='30' cy='30' r='0.5' fill='%23ffcc00'/%3E%3Ccircle cx='70' cy='30' r='0.5' fill='%23ffcc00'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg width='1000' height='1000' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10 H30 V30 H50 V10 H70 V30 H90' fill='none' stroke='%23ffcc00' stroke-width='0.5'/%3E%3Ccircle cx='10' cy='10' r='0.5' fill='%23ffcc00'/%3E%3Ccircle cx='30' cy='30' r='0.5' fill='%23ffcc00'/%3E%3Ccircle cx='70' cy='30' r='0.5' fill='%23ffcc00'/%3E%3C/svg%3E");
     background-size: 200px 200px;
     background-repeat: repeat;
     z-index: 0;
@@ -1479,30 +1480,35 @@ a {
 }
 
 .cta-btn {
-  background-color: #ffcc00;
-  color: #000;
+  background-color: #000;
+  color: #fff;
   padding: 14px 28px;
-  font-size: 18px;
+  font-size: 16px;
   text-decoration: none;
   border-radius: 8px;
   font-weight: bold;
   transition: all 0.3s ease;
+  display: inline-block;
 }
+
 
 .cta-btn:hover {
-  background-color: #000;
-  color: #fff;
-}
-
-.cta-btn.secondary {
-  background-color: #000;
-  color: #fff;
-}
-
-.cta-btn.secondary:hover {
   background-color: #ffcc00;
   color: #000;
 }
+
+.cta-button-group {
+  display: flex;
+  flex-wrap: nowrap; /* keep all on one row */
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.cta-btn {
+  white-space: nowrap; /* prevent text from wrapping */
+  flex-shrink: 1;      /* allow shrinking slightly if needed */
+}
+
 
 .event-slideshow {
   position: relative;
@@ -1590,4 +1596,12 @@ a {
   margin-top: 0.2em;
   margin-bottom: 200px;
   line-height: 1.5;
+}
+
+#modal-body h3{
+  color: black;
+}
+
+#modal-body p {
+  color: #1a1a1a;
 }
