@@ -1,4 +1,0 @@
-mkdir -p assets/papers
-git add assets/papers/AI-Leaders-Latam.pdf
-git commit -m "Add AI Leaders Latam paper"
-git push
