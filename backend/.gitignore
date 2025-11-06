@@ -1,0 +1,24 @@
+# Node.js and dependencies
+node_modules/
+dist/
+.env
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Test coverage
+coverage/
+
+# Environment variables
+.env.local
+.env.development
+.env.test
+.env.production
