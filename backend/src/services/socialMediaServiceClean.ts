@@ -98,10 +98,31 @@ export class SocialMediaService {
     ];
   }
 
+  private getMockFacebookPosts(query: string): FacebookPost[] {
+    // Mock data for development without API credentials
+    return [
+      {
+        id: 'fb1',
+        message: `Nuestra comunidad ${query} está creciendo! Únete a nuestro próximo evento virtual.`,
+        created_time: new Date().toISOString()
+      },
+      {
+        id: 'fb2',
+        message: `${query} México: Impactando positivamente a través de la tecnología e innovación social.`,
+        created_time: new Date().toISOString()
+      },
+      {
+        id: 'fb3',
+        message: `Colaboración exitosa entre ${query} y organizaciones locales para proyectos sostenibles.`,
+        created_time: new Date().toISOString()
+      }
+    ];
+  }
+
   async getTweetsWithSentiment(query: string, maxResults: number = 100): Promise<AnalyzedPost[]> {
     try {
       let tweets: any[] = [];
-      
+
       if (!this.twitterClient) {
         console.log('Using mock data for Twitter (no credentials configured)');
         tweets = this.getMockTweets(query);
@@ -110,7 +131,18 @@ export class SocialMediaService {
           max_results: maxResults,
           'tweet.fields': ['created_at', 'text']
         });
-        tweets = response && response.data ? response.data : [];
+
+        if (Array.isArray(response)) {
+          tweets = response;
+        } else if (Array.isArray(response.data)) {
+          tweets = response.data;
+        } else if (Array.isArray(response.tweets)) {
+          tweets = response.tweets;
+        } else {
+          console.warn('Unexpected Twitter API response (defaulting to empty array)');
+          console.debug('Raw response keys:', Object.keys(response || {}));
+          tweets = [];
+        }
       }
 
       return tweets.map((t: any) => ({
@@ -126,16 +158,49 @@ export class SocialMediaService {
     }
   }
 
-  async getFacebookPostsWithSentiment(query: string): Promise<AnalyzedPost[]> {
+  async getFacebookPostsWithSentiment(query: string, maxResults: number = 100): Promise<AnalyzedPost[]> {
     try {
-      const response = await new Promise<{ data: FacebookPost[] }>((resolve, reject) => {
-  (this.fbClient as any).api('/search', { q: query, type: 'post' }, (res: any) => {
-          if (res && res.error) return reject(res.error);
-          resolve(res);
-        });
-      });
+      let posts: FacebookPost[] = [];
 
-      const posts = response && response.data ? response.data : [];
+      // Use mock data if credentials are missing
+      if (!this.fbClient) {
+        console.log('Using mock data for Facebook (no credentials configured)');
+        posts = this.getMockFacebookPosts(query).slice(0, maxResults);
+      } else {
+
+        const fbAppId = process.env.FACEBOOK_APP_ID;
+        const fbAppSecret = process.env.FACEBOOK_APP_SECRET;
+
+        // Get app access token for searching posts
+        const tokenRes = await new Promise<any>((resolve, reject) => {
+          (this.fbClient as any).api('oauth/access_token', {
+            client_id: fbAppId,
+            client_secret: fbAppSecret,
+            grant_type: 'client_credentials'
+          }, (res: any) => {
+            if (res && res.error) return reject(res.error);
+            resolve(res);
+          });
+        });
+
+        const accessToken = tokenRes.access_token;
+        if (!accessToken) throw new Error('Could not obtain Facebook access token');
+
+        // Search for posts
+        const response = await new Promise<{ data: FacebookPost[] }>((resolve, reject) => {
+          (this.fbClient as any).api(`v18.0/search`, {
+            q: query,
+            type: 'post',
+            access_token: accessToken,
+            limit: maxResults
+          }, (res: any) => {
+            if (res && res.error) return reject(res.error);
+            resolve(res);
+          });
+        });
+
+        posts = response && response.data ? response.data.slice(0, maxResults) : [];
+      }
 
       return posts.map((p: any) => ({
         id: p.id,
