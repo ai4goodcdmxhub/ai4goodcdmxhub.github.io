@@ -1,0 +1,28 @@
+# CDK asset staging directory
+.cdk.staging
+cdk.out
+
+# Compiled JavaScript files
+dist/
+*.js
+*.js.map
+*.d.ts
+
+# Node modules
+node_modules/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
