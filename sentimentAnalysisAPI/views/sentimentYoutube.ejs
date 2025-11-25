@@ -1,0 +1,60 @@
+<%- include('includes/header.ejs') %>
+
+<link rel="stylesheet" href="/css/sentiment.css" />
+
+
+<div class="container principal">
+
+    <div class="row">
+        
+        <!-- Columna 1: Analisis -->
+        <div class="col-md-4">
+
+            <h3 class="mb-3"><strong>Analisis de sentimiento</strong></h3>
+            
+            <button id="startAnalysisBtn" class="btn btn-primary w-100 mb-3">
+            Generar analisis
+            </button>
+
+            <div id="analysisResults">
+
+                
+                <!-- Espacio reservado -->
+                <!-- <div >
+                <p class="text-muted">Aun no hay analisis...</p>
+                </div> -->
+
+            </div>
+
+
+
+        </div>
+
+        <!-- Columna 2: Videos -->
+        <div class="col-md-4">
+
+            <h3 class="mb-3"><strong>Videos recientes sobre IA en Mexico:</strong></h3>
+            <div id="videosContainer" class="row row-cols-1 row-cols-md-2 g-3"></div>
+
+        </div>
+        
+        <!-- Columna 3: Comentarios -->
+        <div class="col-md-4">
+
+            <h3 class="mb-3"><strong>Comentarios destacados:</strong></h3>
+            <div id="commentsBox"></div>
+
+        </div>
+
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src=/js/sentimentYoutube.js></script>
+
+
+
+
+
+<%- include('includes/footer.ejs') %>

@@ -1,0 +1,51 @@
+<%- include('includes/header.ejs') %>
+
+<div class="container my-4">
+  <h1 class="mb-3">YouTube Sentiment Analysis API</h1>
+
+  <form action="/api/youtube" method="POST" class="row g-3" role="form">
+    <div class="col-12">
+      <label for="youtubeInput" class="form-label">Texto a analizar</label>
+      <textarea id="youtubeInput" name="youtubeUrl" class="form-control w-100" rows="6" placeholder="Escribe el texto a analizar" required></textarea>
+    </div>
+    <div class="col-12 d-flex">
+      <button type="submit" class="btn btn-primary ms-auto">Subir</button>
+    </div>
+  </form>
+  <div>
+    <h4 class="mt-4">Puntuación de sentimiento: <strong><%- sentimiento %></strong></h4>
+  </div>
+
+</div>
+
+
+<div class="container my-4">
+  <h1 class="mb-3">YouTube Sentiment Analysis API</h1>
+
+  <!-- input para indicar video en vivo -->
+  <div class="mb-3 row g-2">
+    <div class="col-md-9">
+      <input id="liveVideoId" class="form-control" placeholder="ID del video en vivo (ej: dQw4w9WgXcQ)">
+    </div>
+    <div class="col-md-3">
+      <button id="btnStartLive" class="btn btn-success w-100">Conectar Live</button>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="liveCommentBox" class="form-label">Comentario más nuevo (en tiempo real)</label>
+    <textarea id="liveCommentBox" class="form-control" rows="3" readonly></textarea>
+  </div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/liveChatSocket.js"></script>
+<script>
+  document.getElementById('btnStartLive').addEventListener('click', () => {
+    const vid = document.getElementById('liveVideoId').value.trim();
+    if (!vid) return alert('Ingresa el ID del video en vivo');
+    // start live via socket client function
+    if (typeof startLive === 'function') startLive(vid);
+  });
+</script>
+
+<%- include('includes/footer.ejs') %>

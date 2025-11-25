@@ -1,0 +1,27 @@
+/* Navegación */
+
+.navbar {
+  border-bottom: 1px solid #2d2d2d;
+}
+
+.navbar-brand span {
+  letter-spacing: 0.5px;
+}
+
+.nav-link {
+  color: #d4d4d4 !important;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: #c084fc !important; /* morado claro */
+}
+
+.navbar-toggler {
+  border-color: #c084fc;
+}
+
+.navbar-toggler-icon {
+  filter: brightness(0.7) drop-shadow(0 0 5px #c084fc);
+}
