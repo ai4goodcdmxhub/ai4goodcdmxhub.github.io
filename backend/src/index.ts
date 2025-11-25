@@ -81,6 +81,25 @@ app.get('/api/social/search', async (req, res) => {
   }
 });
 
+app.get('/api/bluesky/search', async (req, res) => {
+  try {
+    const { query, maxResults } = req.query;
+    if (!query) {
+      return res.status(400).json({ error: 'Query parameter is required' });
+    }
+
+    const posts = await socialMediaService.getBlueskyPostsWithSentiment(
+      query as string,
+      maxResults ? parseInt(maxResults as string) : undefined
+    );
+
+    res.json(posts);
+  } catch (error: any) {
+    console.error('Error in Bluesky search endpoint:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 // Start server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

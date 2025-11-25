@@ -1,6 +1,7 @@
 import { TwitterApi } from 'twitter-api-v2';
 import Sentiment from 'sentiment';
 import FB from 'fb';
+import { AtpAgent } from '@atproto/api';
 
 type SentimentResult = {
   score: number;
@@ -16,7 +17,7 @@ type AnalyzedPost = {
   text: string;
   created_at?: string;
   sentiment: SentimentResult;
-  source: 'twitter' | 'facebook';
+  source: 'twitter' | 'facebook' | 'bluesky';
 }
 
 type FacebookPost = {
@@ -24,6 +25,12 @@ type FacebookPost = {
   message: string;
   created_time: string;
 }
+
+type BlueskyPost = {
+  uri: string;
+  text: string;
+  indexedAt: string;
+};
 
 export class SocialMediaService {
   private twitterClient: TwitterApi | null = null;
@@ -201,7 +208,8 @@ export class SocialMediaService {
 
         posts = response && response.data ? response.data.slice(0, maxResults) : [];
       }
-
+      
+      // Return analyzed posts
       return posts.map((p: any) => ({
         id: p.id,
         text: p.message,
@@ -211,6 +219,44 @@ export class SocialMediaService {
       }));
     } catch (error) {
       console.error('Error fetching Facebook posts:', error);
+      throw error;
+    }
+  }
+
+  async getBlueskyPostsWithSentiment(query: string, maxResults: number = 50): Promise<AnalyzedPost[]> {
+    try {
+
+      // Initialize Bluesky client
+      const username = process.env.BLUESKY_USERNAME;
+      const password = process.env.BLUESKY_APP_PASSWORD;
+      const api = new AtpAgent({ service: 'https://bsky.social' });
+
+      if (!username || !password || username.startsWith('your_') || password.startsWith('your_')) {
+        throw new Error('Bluesky credentials not configured');
+      }
+
+      await api.login({ identifier: username, password });
+
+      // Search for posts
+
+      const response = await api.app.bsky.feed.searchPosts({ q: query, limit: maxResults });
+      const posts = (response.data.posts || []).map((p: any) => ({
+        uri: p.uri,
+        text: p.record?.text || '',
+        indexedAt: p.indexedAt
+      }));
+
+      // Return analyzed posts
+
+      return posts.map((p: BlueskyPost) => ({
+        id: p.uri,
+        text: p.text,
+        created_at: p.indexedAt,
+        sentiment: this.analyzeSentiment(p.text || ''),
+        source: 'bluesky' as const
+      }));
+    } catch (error) {
+      console.error('Error fetching Bluesky posts:', error);
       throw error;
     }
   }
@@ -228,11 +274,12 @@ export class SocialMediaService {
   }
 
   async getAllSocialMediaPosts(query: string, maxResults: number = 100): Promise<AnalyzedPost[]> {
-    const [tweets, fbPosts] = await Promise.all([
+    const [tweets, fbPosts, blueskyPosts] = await Promise.all([
       this.getTweetsWithSentiment(query, maxResults),
-      this.getFacebookPostsWithSentiment(query)
+      this.getFacebookPostsWithSentiment(query, maxResults),
+      this.getBlueskyPostsWithSentiment(query, maxResults)
     ]);
 
-    return [...tweets, ...fbPosts];
+    return [...tweets, ...fbPosts, ...blueskyPosts];
   }
 }

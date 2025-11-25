@@ -16,6 +16,14 @@ export const SUPPORTED_SOCIAL_MEDIA = {
       posts: '/posts',
       pages: '/pages',
     }
+  },
+
+  BLUESKY: {
+    name: 'Bluesky',
+    apiVersion: 'v1',
+    endpoints: {
+      posts: '/app/bsky/feed/searchPosts',
+    }
   }
   // Additional social media platforms can be added here
 };
