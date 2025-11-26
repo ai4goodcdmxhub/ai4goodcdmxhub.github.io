@@ -11,8 +11,12 @@ Currently, the backend supports:
    - Sentiment analysis of tweets
 
 2. Facebook API (Graph API v18.0)
-   - Post retrieval
+   - Post retrieval (Currently blocked by Facebook)
    - Page information
+   - Sentiment analysis of posts
+
+2. Bluesky API (AtProto API v1)
+   - Post retrieval
    - Sentiment analysis of posts
 
 ## Setup
@@ -28,6 +32,12 @@ TWITTER_API_KEY=your_api_key
 TWITTER_API_SECRET=your_api_secret
 TWITTER_ACCESS_TOKEN=your_access_token
 TWITTER_ACCESS_TOKEN_SECRET=your_access_token_secret
+
+FACEBOOK_APP_ID=your_app_id
+FACEBOOK_APP_SECRET=your_app_secret
+
+BLUESKY_USERNAME=your_username
+BLUESKY_APP_PASSWORD=your_app_password
 \`\`\`
 
 3. Build the project:
@@ -53,6 +63,20 @@ npm run dev
   - Query Parameters:
     - query (required): Search term
     - maxResults (optional): Maximum number of tweets to return
+
+### Facebook
+
+- GET `/api/facebook/search`
+  - Query Parameters:
+    - query (required): Search term
+    - maxResults (optional): Maximum number of posts to return
+
+### Bluesky
+
+- GET `/api/bluesky/search`
+  - Query Parameters:
+    - query (required): Search term
+    - maxResults (optional): Maximum number of skeets to return
 
 ## Sentiment Analysis
 
